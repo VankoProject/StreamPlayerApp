@@ -1,4 +1,4 @@
-package com.kliachenko.data
+package com.kliachenko.presentation
 
 import org.junit.Test
 

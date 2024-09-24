@@ -40,6 +40,7 @@ dependencies {
 
     implementation(project(":data"))
     implementation(project(":domain"))
+    implementation(project(":presentation"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -51,6 +52,6 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     //Hilt
-    implementation ("com.google.dagger:hilt-android:2.50")
+    implementation (libs.hilt.android)
 
 }
