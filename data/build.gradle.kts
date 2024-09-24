@@ -1,21 +1,19 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id ("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
+    id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.kliachenko.streamplayerapp"
+    namespace = "com.kliachenko.data"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.kliachenko.streamplayerapp"
         minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -37,20 +35,28 @@ android {
 }
 
 dependencies {
-
-    implementation(project(":data"))
     implementation(project(":domain"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    //Room
+    api("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    androidTestImplementation("androidx.room:room-testing:2.6.1")
+
+    //Retrofit
+    api("com.squareup.retrofit2:retrofit:2.9.0")
+    api("com.squareup.retrofit2:converter-gson:2.9.0")
+    api("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
     //Hilt
     implementation ("com.google.dagger:hilt-android:2.50")
+    kapt ("com.google.dagger:hilt-compiler:2.50")
+    kapt ("androidx.hilt:hilt-compiler:1.2.0")
 
 }
