@@ -39,8 +39,22 @@ class ContentUseCaseTest {
 
         val expected: ContentLoadResult = ContentLoadResult.Success(
             listOf(
-                VideoRecordItem.Base(id = 0, type = "film", tags = "natural", videoUrl = "url0"),
-                VideoRecordItem.Base(id = 1, type = "clip", tags = "dance", videoUrl = "url1")
+                VideoRecordItem.Base(
+                    id = 0,
+                    videoType = "film",
+                    duration = 90,
+                    tags = "natural",
+                    videoUrl = "https://example.com/videoUrl0",
+                    imageUrl = "https://example.com/imageUrl0"
+                ),
+                VideoRecordItem.Base(
+                    id = 1,
+                    videoType = "clip",
+                    duration = 120,
+                    tags = "urban",
+                    videoUrl = "https://example.com/videoUrl1",
+                    imageUrl = "https://example.com/imageUrl1"
+                )
             )
         )
         val actual: ContentLoadResult = useCase.execute()
@@ -61,18 +75,27 @@ class ContentUseCaseTest {
                 listOf(
                     VideoRecordItem.Base(
                         id = 0,
-                        type = "film",
+                        videoType = "film",
+                        duration = 90,
                         tags = "natural",
-                        videoUrl = "url0"
+                        videoUrl = "https://example.com/videoUrl0",
+                        imageUrl = "https://example.com/imageUrl0"
                     ),
-                    VideoRecordItem.Base(id = 1, type = "clip", tags = "dance", videoUrl = "url1")
+                    VideoRecordItem.Base(
+                        id = 1,
+                        videoType = "clip",
+                        duration = 120,
+                        tags = "urban",
+                        videoUrl = "https://example.com/videoUrl1",
+                        imageUrl = "https://example.com/imageUrl1"
+                    )
                 )
             )
         }
 
-        override suspend fun contentItems(): ContentLoadResult {
+        override suspend fun videoRecordsItems(): ContentLoadResult {
             return actualResult
         }
-
     }
+
 }
