@@ -1,9 +1,9 @@
 package com.kliachenko.domain.settings
 
-import com.kliachenko.domain.ContentItem
 import com.kliachenko.domain.ContentLoadResult
 import com.kliachenko.domain.ContentRepository
-import com.kliachenko.domain.MovieListUserCase
+import com.kliachenko.domain.VideoRecordItem
+import com.kliachenko.domain.VideoRecordListUserCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -13,12 +13,12 @@ import org.junit.Test
 class ContentUseCaseTest {
 
     private lateinit var repository: FakeContentRepository
-    private lateinit var useCase: MovieListUserCase
+    private lateinit var useCase: VideoRecordListUserCase
 
     @Before
     fun setup() {
         repository = FakeContentRepository()
-        useCase = MovieListUserCase.Base(
+        useCase = VideoRecordListUserCase.Base(
             repository = repository
         )
     }
@@ -39,8 +39,22 @@ class ContentUseCaseTest {
 
         val expected: ContentLoadResult = ContentLoadResult.Success(
             listOf(
-                ContentItem.Base(id = 0, type = "film", tags = "natural", videoUrl = "url0"),
-                ContentItem.Base(id = 1, type = "clip", tags = "dance", videoUrl = "url1")
+                VideoRecordItem.Base(
+                    id = 0,
+                    videoType = "film",
+                    duration = 90,
+                    tags = "natural",
+                    videoUrl = "https://example.com/videoUrl0",
+                    imageUrl = "https://example.com/imageUrl0"
+                ),
+                VideoRecordItem.Base(
+                    id = 1,
+                    videoType = "clip",
+                    duration = 120,
+                    tags = "urban",
+                    videoUrl = "https://example.com/videoUrl1",
+                    imageUrl = "https://example.com/imageUrl1"
+                )
             )
         )
         val actual: ContentLoadResult = useCase.execute()
@@ -59,15 +73,29 @@ class ContentUseCaseTest {
         fun hasData() {
             actualResult = ContentLoadResult.Success(
                 listOf(
-                    ContentItem.Base(id = 0, type = "film", tags = "natural", videoUrl = "url0"),
-                    ContentItem.Base(id = 1, type = "clip", tags = "dance", videoUrl = "url1")
+                    VideoRecordItem.Base(
+                        id = 0,
+                        videoType = "film",
+                        duration = 90,
+                        tags = "natural",
+                        videoUrl = "https://example.com/videoUrl0",
+                        imageUrl = "https://example.com/imageUrl0"
+                    ),
+                    VideoRecordItem.Base(
+                        id = 1,
+                        videoType = "clip",
+                        duration = 120,
+                        tags = "urban",
+                        videoUrl = "https://example.com/videoUrl1",
+                        imageUrl = "https://example.com/imageUrl1"
+                    )
                 )
             )
         }
 
-        override suspend fun contentItems(): ContentLoadResult {
+        override suspend fun videoRecordsItems(): ContentLoadResult {
             return actualResult
         }
-
     }
+
 }

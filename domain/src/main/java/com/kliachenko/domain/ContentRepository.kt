@@ -2,7 +2,7 @@ package com.kliachenko.domain
 
 interface ContentRepository {
 
-    suspend fun contentItems(): ContentLoadResult
+    suspend fun videoRecordsItems(): ContentLoadResult
 }
 
 interface ContentLoadResult {
@@ -11,7 +11,7 @@ interface ContentLoadResult {
 
     interface Mapper<T : Any> {
 
-        fun mapSuccess(items: List<ContentItem>): T
+        fun mapSuccess(items: List<VideoRecordItem>): T
 
         fun mapError(errorMessage: String): T
 
@@ -28,7 +28,7 @@ interface ContentLoadResult {
             mapper.mapError(errorMessage)
     }
 
-    data class Success(private val items: List<ContentItem>) : ContentLoadResult {
+    data class Success(private val items: List<VideoRecordItem>) : ContentLoadResult {
         override fun <T : Any> map(mapper: Mapper<T>): T =
             mapper.mapSuccess(items)
     }

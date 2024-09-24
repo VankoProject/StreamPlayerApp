@@ -1,10 +1,10 @@
 package com.kliachenko.domain
 
-interface MovieListUserCase {
+interface VideoRecordListUserCase {
 
     suspend fun execute(): ContentLoadResult
 
-    class Base(private val repository: ContentRepository): MovieListUserCase {
-        override suspend fun execute() = repository.contentItems()
+    class Base(private val repository: ContentRepository): VideoRecordListUserCase {
+        override suspend fun execute() = repository.videoRecordsItems()
     }
 }
