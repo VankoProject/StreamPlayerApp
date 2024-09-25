@@ -15,7 +15,6 @@ interface ImageCloudLoader {
 
 }
 
-
 interface ProvideImageCloudLoader {
 
     fun imageLoader(): ImageCloudLoader

@@ -3,7 +3,7 @@ package com.kliachenko.presentation.main
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.kliachenko.domain.ContentLoadResult
-import com.kliachenko.domain.VideoRecordListUserCase
+import com.kliachenko.domain.VideoRecordListUseCase
 import com.kliachenko.presentation.core.BaseViewModel
 import com.kliachenko.presentation.core.Observe
 import com.kliachenko.presentation.core.RunAsync
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ContentViewModel @Inject constructor(
-    private val videoRecordListUserCase: VideoRecordListUserCase,
+    private val videoRecordListUseCase: VideoRecordListUseCase,
     private val liveDataWrapper: ContentCommunication,
     private val uiMapper: ContentLoadResult.Mapper<ContentUiState>,
     runAsync: RunAsync
@@ -22,7 +22,7 @@ class ContentViewModel @Inject constructor(
     fun init() {
         liveDataWrapper.update(ContentUiState.Progress)
         runAsyncTask({
-            videoRecordListUserCase.execute()
+            videoRecordListUseCase.execute()
         }) {
             liveDataWrapper.update(it.map(uiMapper))
         }

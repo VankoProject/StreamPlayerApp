@@ -3,8 +3,9 @@ package com.kliachenko.presentation.main.uiMapper
 import com.kliachenko.domain.ContentLoadResult
 import com.kliachenko.domain.VideoRecordItem
 import com.kliachenko.presentation.main.ContentUiState
+import javax.inject.Inject
 
-class ContentLoadResultMapperImpl(
+class ContentLoadResultMapperImpl @Inject constructor(
     private val uiMapper: ContentUiMapperImpl,
 ) : ContentLoadResult.Mapper<ContentUiState> {
 
