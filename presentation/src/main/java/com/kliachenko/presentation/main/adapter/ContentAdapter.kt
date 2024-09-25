@@ -54,12 +54,8 @@ abstract class ContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     open fun bind(item: ContentUi) = Unit
 
-    class Progress(private val binding: ProgressStateLayoutBinding) :
-        ContentViewHolder(binding.root) {
-        override fun bind(item: ContentUi) {
-            super.bind(item)
-        }
-    }
+    class Progress(binding: ProgressStateLayoutBinding) :
+        ContentViewHolder(binding.root)
 
     class Error(
         private val binding: ErrorStateLayoutBinding,
@@ -79,8 +75,7 @@ abstract class ContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         override fun bind(item: ContentUi) {
             item.show(binding)
             binding.root.setOnClickListener {
-                // TODO: add navigation
-                //item.videoUrl()
+
             }
         }
     }

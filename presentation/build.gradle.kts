@@ -38,6 +38,10 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
     implementation(project(":domain"))
 
@@ -47,6 +51,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.hilt.common)
+    implementation (libs.androidx.fragment.ktx)
 
     //Hilt
     implementation (libs.hilt.android)

@@ -8,7 +8,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class BaseViewModel @Inject constructor(
+abstract class BaseViewModel (
     private val runAsync: RunAsync,
 ) : ViewModel() {
 
@@ -31,7 +31,7 @@ interface RunAsync {
         uiBlock: (T) -> Unit,
     )
 
-    class Base : RunAsync {
+    class Base @Inject constructor(): RunAsync {
         override fun <T : Any> startAsyncTask(
             coroutineScope: CoroutineScope,
             background: suspend () -> T,
