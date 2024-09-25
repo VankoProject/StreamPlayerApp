@@ -2,28 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/errorRootLayout"
-    android:orientation="vertical"
-    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkGraphite">
+    android:background="@color/darkGraphite"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/errorTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="@dimen/large_margin"
         android:gravity="center"
         android:textColor="@color/error"
-        android:textSize="24sp"
-        tools:text="No internet connection"/>
+        android:textSize="@dimen/xx_medium_text"
+        tools:text="No internet connection" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/retryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/skyBlue"
         android:text="@string/retry_button"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/skyBlue"/>
+        android:textColor="@color/white" />
 
 </LinearLayout>

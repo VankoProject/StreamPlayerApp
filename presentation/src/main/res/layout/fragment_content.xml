@@ -2,37 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/contentFragment"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkGraphite">
+    android:background="@color/darkGraphite"
+    android:orientation="vertical">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x_medium_margin"
+        android:text="@string/app_title_name"
         android:textColor="@color/skyBlue"
-        android:layout_margin="16dp"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:text="@string/app_title_name"/>
+        android:textSize="@dimen/large_text"
+        android:textStyle="bold" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/categoryTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x_medium_margin"
+        android:layout_marginBottom="@dimen/x_small_margin"
+        android:text="@string/category_name"
         android:textColor="@color/white"
-        android:textSize="18sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/category_name"/>
+        android:textSize="@dimen/xx_medium_text" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contentRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:listitem="@layout/video_item_layout"
-        tools:itemCount="10"/>
+        tools:itemCount="10"
+        tools:listitem="@layout/video_item_layout" />
 
 </LinearLayout>

@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/successLayoutId"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="@dimen/card_height"
+    android:layout_margin="@dimen/x_medium_margin"
     android:backgroundTint="@color/coal"
-    android:layout_margin="16dp"
-    app:cardCornerRadius="8dp"
-    android:elevation="8dp">
+    android:elevation="@dimen/card_elevation"
+    app:cardCornerRadius="@dimen/small_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contentLayout"
@@ -17,51 +17,49 @@
 
         <ImageView
             android:id="@+id/posterImageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/ic_launcher_background"
+            android:layout_width="@dimen/poster_width"
+            android:layout_height="@dimen/poster_height"
             android:contentDescription="@string/video_picture"
+            android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_background" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tagsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x_medium_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:textColor="@color/white"
+            android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@+id/posterImageView"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            tools:text="trees, forest, woods"/>
+            tools:text="trees, forest, woods" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/videoTypeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/posterImageView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="8dp"
-            android:textSize="12sp"
+            android:layout_marginStart="@dimen/x_medium_margin"
+            android:layout_marginBottom="@dimen/small_margin"
             android:textColor="@color/white"
-            tools:text="film"/>
+            android:textSize="@dimen/medium_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/posterImageView"
+            tools:text="film" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/durationTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:padding="8dp"
-            android:textSize="12sp"
+            android:padding="@dimen/small_padding"
             android:textColor="@color/white"
-            tools:text="10 seconds"/>
+            android:textSize="@dimen/medium_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="10 seconds" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </androidx.cardview.widget.CardView>
