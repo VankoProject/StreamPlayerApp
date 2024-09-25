@@ -2,6 +2,7 @@ package com.kliachenko.streamplayerapp
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.kliachenko.presentation.main.MainActivity
 import com.kliachenko.streamplayerapp.mainPageObject.MainPage
 import com.kliachenko.streamplayerapp.mainPageObject.success.VideoItem
 import org.junit.Before

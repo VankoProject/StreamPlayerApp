@@ -19,7 +19,7 @@ class ErrorStateUi(
     uiContext: Context,
 ) {
 
-    private val errorLayoutId: Int = com.kliachenko.presentation.R.id.errorRootlayout
+    private val errorLayoutId: Int = com.kliachenko.presentation.R.id.errorRootLayout
     private val errorLayoutClass = LinearLayout::class.java
     private val errorTextUi = ErrorTextUi(errorLayoutId, errorLayoutClass, uiContext)
     private val retryButtonUi = RetryButtonUi(errorLayoutId, errorLayoutClass, uiContext)

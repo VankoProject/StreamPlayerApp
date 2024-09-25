@@ -2,11 +2,11 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id ("dagger.hilt.android.plugin")
-    id("kotlin-kapt")
+    id ("kotlin-kapt")
 }
 
 android {
-    namespace = "com.kliachenko.data"
+    namespace = "com.kliachenko.presentation"
     compileSdk = 34
 
     defaultConfig {
@@ -32,6 +32,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 dependencies {
@@ -43,21 +51,14 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    //Room
-    api(libs.androidx.room.ktx)
-    //noinspection KaptUsageInsteadOfKsp
-    kapt(libs.androidx.room.compiler)
-    androidTestImplementation(libs.androidx.room.testing)
-
-    //Retrofit
-    api(libs.retrofit)
-    api(libs.converter.gson)
-    api(libs.logging.interceptor)
+    implementation(libs.androidx.hilt.common)
+    implementation (libs.androidx.fragment.ktx)
 
     //Hilt
     implementation (libs.hilt.android)
     kapt (libs.hilt.compiler)
-    kapt (libs.androidx.hilt.compiler)
+    kapt(libs.androidx.hilt.compiler)
 
+    //Picasso
+    implementation (libs.picasso)
 }
