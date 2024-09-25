@@ -2,10 +2,8 @@ package com.kliachenko.streamplayerapp
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.kliachenko.data.main.cloud.Large
-import com.kliachenko.data.main.cloud.Result
-import com.kliachenko.data.main.cloud.Videos
-import org.junit.Assert.*
+import com.kliachenko.streamplayerapp.mainPageObject.MainPage
+import com.kliachenko.streamplayerapp.mainPageObject.success.VideoItem
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -34,21 +32,19 @@ class ScenarioTest {
         mainPage.tapRetryButton()
         mainPage.checkMainProgressState()
         mainPage.waitUntilDashboardProgressStateIsNotVisible()
-        mainPage.checkSuccessfulState(
-            category = "Short videos",
+        mainPage.checkSuccessState(
             items = listOf(
-                VideoItem(videoType = "film", duration = 0.13, tags = "animals"),
-                VideoItem(videoType = "animation", duration = 0.25, tags = "industry"),
-                VideoItem(videoType = "film", duration = 180, tags = "people")
+                VideoItem(videoType = "film", duration = "13 seconds", tags = "animals"),
+                VideoItem(videoType = "animation", duration = "25 seconds", tags = "industry"),
+                VideoItem(videoType = "film", duration = "30 seconds", tags = "people")
             )
         )
         activityScenarioRule.scenario.recreate()
-        mainPage.checkSuccessfulState(
-            category = "Short videos",
+        mainPage.checkSuccessState(
             items = listOf(
-                VideoItem(videoType = "film", duration = 0.13, tags = "animals"),
-                VideoItem(videoType = "animation", duration = 0.25, tags = "industry"),
-                VideoItem(videoType = "film", duration = 180, tags = "people")
+                VideoItem(videoType = "film", duration = "13 seconds", tags = "animals"),
+                VideoItem(videoType = "animation", duration = "25 seconds", tags = "industry"),
+                VideoItem(videoType = "film", duration = "30 seconds", tags = "people")
             )
         )
         mainPage.tapItem(position = 0)
