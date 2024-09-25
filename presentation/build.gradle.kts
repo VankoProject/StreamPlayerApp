@@ -52,4 +52,7 @@ dependencies {
     implementation (libs.hilt.android)
     kapt (libs.hilt.compiler)
     kapt(libs.androidx.hilt.compiler)
+
+    //Picasso
+    implementation (libs.picasso)
 }

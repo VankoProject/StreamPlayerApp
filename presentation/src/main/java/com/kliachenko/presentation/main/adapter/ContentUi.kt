@@ -37,6 +37,7 @@ interface ContentUi {
     }
 
     data class VideoRecord(
+        private val id: Int,
         private val videoType: String,
         private val duration: Int,
         private val tags: String,
@@ -45,13 +46,13 @@ interface ContentUi {
 
         override fun type() = ContentUiViewType.VideoRecord
 
-        override fun id(): String = javaClass.simpleName
+        override fun id(): String = id.toString()
 
         override fun show(binding: VideoItemLayoutBinding) = with(binding) {
             videoTypeTextView.text = videoType
             durationTextView.text = duration.toString()
             tagsTextView.text = tags
-            posterImageView.show(imageUrl) // TODO: PicassoWrapper with CustomImageView
+            posterImageView.show(imageUrl)
         }
 
     }
