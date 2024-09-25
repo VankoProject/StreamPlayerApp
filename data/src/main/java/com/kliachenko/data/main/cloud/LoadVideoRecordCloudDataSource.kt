@@ -32,8 +32,8 @@ interface LoadVideoRecordCloudDataSource {
                     Result(
                         id = 0,
                         videoType = "film",
-                        duration = 90,
-                        tags = "natural",
+                        duration = 13,
+                        tags = "animals",
                         videos = Videos(
                             large = Large(
                                 videoUrl = "https://example.com/videoUrl0",
@@ -43,9 +43,9 @@ interface LoadVideoRecordCloudDataSource {
                     ),
                     Result(
                         id = 1,
-                        videoType = "clip",
-                        duration = 120,
-                        tags = "urban",
+                        videoType = "animation",
+                        duration = 25,
+                        tags = "industry",
                         videos = Videos(
                             large = Large(
                                 videoUrl = "https://example.com/videoUrl1",
@@ -55,9 +55,9 @@ interface LoadVideoRecordCloudDataSource {
                     ),
                     Result(
                         id = 2,
-                        videoType = "series",
-                        duration = 180,
-                        tags = "comedy",
+                        videoType = "film",
+                        duration = 30,
+                        tags = "people",
                         videos = Videos(
                             large = Large(
                                 videoUrl = "https://example.com/videoUrl2",
