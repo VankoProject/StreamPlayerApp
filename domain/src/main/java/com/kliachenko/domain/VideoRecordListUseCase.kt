@@ -1,10 +1,14 @@
 package com.kliachenko.domain
 
-interface VideoRecordListUserCase {
+import javax.inject.Inject
+
+
+interface VideoRecordListUseCase {
 
     suspend fun execute(): ContentLoadResult
 
-    class Base(private val repository: ContentRepository): VideoRecordListUserCase {
+    class Base @Inject constructor(private val repository: ContentRepository) :
+        VideoRecordListUseCase {
         override suspend fun execute() = repository.videoRecordsItems()
     }
 }

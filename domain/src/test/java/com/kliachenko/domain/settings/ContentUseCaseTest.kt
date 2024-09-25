@@ -3,7 +3,7 @@ package com.kliachenko.domain.settings
 import com.kliachenko.domain.ContentLoadResult
 import com.kliachenko.domain.ContentRepository
 import com.kliachenko.domain.VideoRecordItem
-import com.kliachenko.domain.VideoRecordListUserCase
+import com.kliachenko.domain.VideoRecordListUseCase
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -13,12 +13,12 @@ import org.junit.Test
 class ContentUseCaseTest {
 
     private lateinit var repository: FakeContentRepository
-    private lateinit var useCase: VideoRecordListUserCase
+    private lateinit var useCase: VideoRecordListUseCase
 
     @Before
     fun setup() {
         repository = FakeContentRepository()
-        useCase = VideoRecordListUserCase.Base(
+        useCase = VideoRecordListUseCase.Base(
             repository = repository
         )
     }
