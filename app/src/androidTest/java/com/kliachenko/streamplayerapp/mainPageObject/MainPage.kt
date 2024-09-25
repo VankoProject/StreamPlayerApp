@@ -24,7 +24,7 @@ class MainPage {
     private val uiContext = InstrumentationRegistry.getInstrumentation().targetContext
 
     private val rootLayoutId: Matcher<View> =
-        withParent(withId(com.kliachenko.presentation.R.id.rootLayout))
+        withParent(withId(com.kliachenko.presentation.R.id.contentFragment))
     private val rootParentClass: Matcher<View> = withParent(isAssignableFrom(LinearLayout::class.java))
     private val rootInteraction: ViewInteraction = onView(allOf(rootLayoutId, rootParentClass))
 
