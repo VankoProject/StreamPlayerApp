@@ -5,16 +5,12 @@ import com.kliachenko.data.main.ContentRepositoryImpl
 import com.kliachenko.data.main.cache.VideoRecordCacheDataSource
 import com.kliachenko.data.main.cloud.LoadVideoRecordCloudDataSource
 import com.kliachenko.data.mapper.VideoRecordMapper
-import com.kliachenko.domain.ContentLoadResult
 import com.kliachenko.domain.ContentRepository
-import com.kliachenko.presentation.main.ContentUiState
-import com.kliachenko.presentation.main.uiMapper.ContentLoadResultMapperImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -39,7 +35,6 @@ abstract class ContentModule {
     abstract fun bindVideoRecordMapperToDomain(
         mapper: VideoRecordMapper.ToDomain.Base,
     ): VideoRecordMapper.ToDomain
-
 
 
     companion object {

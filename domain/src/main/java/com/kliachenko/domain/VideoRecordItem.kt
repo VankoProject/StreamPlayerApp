@@ -23,7 +23,7 @@ interface VideoRecordItem {
         private val videoUrl: String,
         private val imageUrl: String,
     ) : VideoRecordItem {
-        override fun <T : Any> map(mapper: VideoRecordItem.Mapper<T>): T =
+        override fun <T : Any> map(mapper: Mapper<T>): T =
             mapper.mapItem(
                 id = id,
                 videoType = videoType,

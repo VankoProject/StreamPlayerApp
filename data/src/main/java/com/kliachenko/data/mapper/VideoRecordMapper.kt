@@ -2,7 +2,6 @@ package com.kliachenko.data.mapper
 
 import com.kliachenko.data.main.cache.VideoRecordCache
 import com.kliachenko.domain.VideoRecordItem
-import javax.inject.Inject
 
 interface VideoRecordMapper<T : Any> {
 

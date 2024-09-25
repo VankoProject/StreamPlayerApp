@@ -16,8 +16,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 abstract class CoreModule {
 
-    /*
-    @note: In this method, you can replace ProvideInstance.Base with .Mock to run unit tests
+    /**
+    In this method, you can replace ProvideInstance.Base with .Mock to run unit tests
     */
     @Binds
     abstract fun bindProvideInstance(provideInstance: ProvideInstance.Base): ProvideInstance
