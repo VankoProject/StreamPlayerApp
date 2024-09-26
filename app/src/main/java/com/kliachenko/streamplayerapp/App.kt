@@ -1,4 +1,4 @@
-package com.kliachenko.streamplayerapp.di
+package com.kliachenko.streamplayerapp
 
 import android.app.Application
 import com.kliachenko.presentation.core.ImageCloudLoader

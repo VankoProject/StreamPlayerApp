@@ -2,7 +2,6 @@ package com.kliachenko.domain
 
 import javax.inject.Inject
 
-
 interface VideoRecordListUseCase {
 
     suspend fun execute(): ContentLoadResult

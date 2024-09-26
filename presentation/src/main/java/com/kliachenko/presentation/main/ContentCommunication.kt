@@ -1,9 +1,10 @@
 package com.kliachenko.presentation.main
 
 import com.kliachenko.presentation.core.LiveDataWrapper
+import javax.inject.Inject
 
 interface ContentCommunication: LiveDataWrapper.Mutable<ContentUiState> {
 
-    class Base: LiveDataWrapper.Abstract<ContentUiState>(), ContentCommunication
+    class Base @Inject constructor(): LiveDataWrapper.Abstract<ContentUiState>(), ContentCommunication
 
 }

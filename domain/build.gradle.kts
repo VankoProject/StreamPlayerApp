@@ -11,4 +11,7 @@ java {
 dependencies {
     testImplementation(libs.junit)
     testImplementation (libs.kotlinx.coroutines.test)
+
+    //Javax annotation
+    implementation(group = "javax.inject", name = "javax.inject", version = "1")
 }

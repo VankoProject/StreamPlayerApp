@@ -2,6 +2,7 @@ package com.kliachenko.data.mapper
 
 import com.kliachenko.data.main.cache.VideoRecordCache
 import com.kliachenko.domain.VideoRecordItem
+import javax.inject.Inject
 
 interface VideoRecordMapper<T : Any> {
 
@@ -15,7 +16,7 @@ interface VideoRecordMapper<T : Any> {
     ): T
 
     interface ToCache : VideoRecordMapper<VideoRecordCache> {
-        object Base : ToCache {
+        class Base @Inject constructor() : ToCache {
             override fun map(
                 id: Int,
                 videoType: String,
@@ -35,7 +36,7 @@ interface VideoRecordMapper<T : Any> {
     }
 
     interface ToDomain : VideoRecordMapper<VideoRecordItem> {
-        object Base : ToDomain {
+        class Base @Inject constructor() : ToDomain {
             override fun map(
                 id: Int,
                 videoType: String,

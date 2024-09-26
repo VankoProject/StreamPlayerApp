@@ -23,7 +23,7 @@ abstract class CoreModule {
     abstract fun bindProvideInstance(provideInstance: ProvideInstance.Base): ProvideInstance
 
     @Binds
-    abstract fun bindRunAsync(runAsync: RunAsync): RunAsync
+    abstract fun bindRunAsync(runAsync: RunAsync.Base): RunAsync
 
     @Binds
     abstract fun bindProvideResources(provideResources: ProvideResourcesImpl): ProvideResources

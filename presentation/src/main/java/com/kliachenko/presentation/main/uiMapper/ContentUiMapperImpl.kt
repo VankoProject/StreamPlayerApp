@@ -2,9 +2,10 @@ package com.kliachenko.presentation.main.uiMapper
 
 import com.kliachenko.domain.VideoRecordItem
 import com.kliachenko.presentation.main.adapter.ContentUi
+import javax.inject.Inject
 
 
-class ContentUiMapperImpl : VideoRecordItem.Mapper<ContentUi> {
+class ContentUiMapperImpl @Inject constructor() : VideoRecordItem.Mapper<ContentUi> {
 
     override fun mapItem(
         id: Int,
