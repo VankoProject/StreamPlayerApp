@@ -53,7 +53,7 @@ interface ContentUi {
 
         override fun show(binding: VideoItemLayoutBinding) = with(binding) {
             videoTypeTextView.text = videoType
-            durationTextView.text = duration.toString()
+            durationTextView.show(duration)
             tagsTextView.text = tags
             posterImageView.show(imageUrl)
         }

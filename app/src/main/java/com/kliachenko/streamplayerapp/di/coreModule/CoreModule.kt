@@ -18,7 +18,7 @@ abstract class CoreModule {
 
     /**
     In this method, you can replace ProvideInstance.Base with .Mock to run unit tests
-    */
+     */
     @Binds
     abstract fun bindProvideInstance(provideInstance: ProvideInstance.Base): ProvideInstance
 
@@ -34,5 +34,6 @@ abstract class CoreModule {
     @Binds
     @Singleton
     abstract fun bindContentCommunication(
-        communication: ContentCommunication.Base): ContentCommunication
+        communication: ContentCommunication.Base,
+    ): ContentCommunication
 }

@@ -74,6 +74,7 @@ abstract class ContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val navigation: (String) -> Unit,
     ) : ContentViewHolder(binding.root) {
         override fun bind(item: ContentUi) {
+            item.show(binding)
             binding.root.setOnClickListener {
                 navigation(item.videoUrl())
             }

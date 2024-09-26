@@ -3,6 +3,7 @@ package com.kliachenko.presentation.content.customView
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
+import com.kliachenko.presentation.R
 import com.kliachenko.presentation.core.ImageCloudLoader
 import com.kliachenko.presentation.core.ProvideImageCloudLoader
 
@@ -23,7 +24,9 @@ class CustomImageView : AppCompatImageView, ShowImage {
     private var imageUrl: String = ""
 
     override fun show(imageUrl: String) {
-        imageCloudLoader.show(this@CustomImageView, imageUrl)
+        val width = context.resources.getDimensionPixelSize(R.dimen.poster_width)
+        val height = context.resources.getDimensionPixelSize(R.dimen.poster_height)
+        imageCloudLoader.show(this, imageUrl, width, height)
         this.imageUrl = imageUrl
     }
 

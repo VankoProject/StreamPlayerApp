@@ -51,7 +51,7 @@
             app:layout_constraintStart_toEndOf="@+id/posterImageView"
             tools:text="film" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <com.kliachenko.presentation.content.customView.CustomDurationTextView
             android:id="@+id/durationTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

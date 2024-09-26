@@ -1,15 +1,20 @@
 package com.kliachenko.presentation.core
 
-import android.widget.ImageView
+import com.kliachenko.presentation.content.customView.CustomImageView
 import com.squareup.picasso.Picasso
 
 interface ImageCloudLoader {
 
-    fun show(imageView: ImageView, imageUrl: String)
+    fun show(imageView: CustomImageView, imageUrl: String, width: Int, height: Int)
 
     class Base : ImageCloudLoader {
-        override fun show(imageView: ImageView, imageUrl: String) {
-            Picasso.get().load(imageUrl).into(imageView)
+        override fun show(imageView: CustomImageView, imageUrl: String, width: Int, height: Int) {
+            Picasso.get()
+                .load(imageUrl)
+                .resize(
+                    width, height
+                )
+                .into(imageView)
         }
     }
 

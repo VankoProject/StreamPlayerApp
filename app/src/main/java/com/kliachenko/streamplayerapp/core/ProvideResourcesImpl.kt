@@ -14,4 +14,5 @@ class ProvideResourcesImpl @Inject constructor(
 
     override fun serviceUnavailableMessage() =
         context.getString(R.string.service_unavailable)
+
 }
