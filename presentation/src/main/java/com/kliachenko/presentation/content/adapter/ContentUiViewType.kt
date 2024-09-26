@@ -1,4 +1,4 @@
-package com.kliachenko.presentation.main.adapter
+package com.kliachenko.presentation.content.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -11,12 +11,14 @@ interface ContentUiViewType {
     fun createViewHolder(
         parent: ViewGroup,
         clickActions: ClickActions,
+        navigation: (String) -> Unit,
     ): ContentViewHolder
 
     object Progress : ContentUiViewType {
         override fun createViewHolder(
             parent: ViewGroup,
             clickActions: ClickActions,
+            navigation: (String) -> Unit,
         ) = ContentViewHolder.Progress(
             ProgressStateLayoutBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
@@ -28,6 +30,7 @@ interface ContentUiViewType {
         override fun createViewHolder(
             parent: ViewGroup,
             clickActions: ClickActions,
+            navigation: (String) -> Unit,
         ) = ContentViewHolder.Error(
             ErrorStateLayoutBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
@@ -39,10 +42,11 @@ interface ContentUiViewType {
         override fun createViewHolder(
             parent: ViewGroup,
             clickActions: ClickActions,
+            navigation: (String) -> Unit,
         ) = ContentViewHolder.VideoRecord(
             VideoItemLayoutBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-            )
+            ), navigation
         )
     }
 

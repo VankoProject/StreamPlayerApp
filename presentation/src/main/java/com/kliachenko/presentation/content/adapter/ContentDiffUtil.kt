@@ -1,4 +1,4 @@
-package com.kliachenko.presentation.main.adapter
+package com.kliachenko.presentation.content.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 

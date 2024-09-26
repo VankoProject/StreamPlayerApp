@@ -1,4 +1,4 @@
-package com.kliachenko.presentation.main.adapter
+package com.kliachenko.presentation.content.adapter
 
 import android.view.View
 import android.view.ViewGroup
@@ -8,13 +8,9 @@ import com.kliachenko.presentation.databinding.ErrorStateLayoutBinding
 import com.kliachenko.presentation.databinding.ProgressStateLayoutBinding
 import com.kliachenko.presentation.databinding.VideoItemLayoutBinding
 
-interface ShowList {
-
-    fun showList(uiState: List<ContentUi>)
-}
-
 class ContentAdapter(
     private val clickActions: ClickActions,
+    private val navigation: (String) -> Unit,
     private val viewTypeList: List<ContentUiViewType> = ContentUiViewType.typeList(),
 ) : RecyclerView.Adapter<ContentViewHolder>(), ShowList {
 
@@ -32,7 +28,7 @@ class ContentAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentViewHolder {
-        return viewTypeList[viewType].createViewHolder(parent, clickActions)
+        return viewTypeList[viewType].createViewHolder(parent, clickActions, navigation)
     }
 
     override fun onBindViewHolder(holder: ContentViewHolder, position: Int) {
@@ -46,7 +42,7 @@ class ContentAdapter(
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         list.clear()
         list.addAll(uiState)
-        diffResult.dispatchUpdatesTo(this@ContentAdapter)
+        diffResult.dispatchUpdatesTo(this)
     }
 }
 
@@ -54,8 +50,12 @@ abstract class ContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     open fun bind(item: ContentUi) = Unit
 
-    class Progress(binding: ProgressStateLayoutBinding) :
-        ContentViewHolder(binding.root)
+    class Progress(private val binding: ProgressStateLayoutBinding) :
+        ContentViewHolder(binding.root) {
+        override fun bind(item: ContentUi) {
+            item.show(binding)
+        }
+    }
 
     class Error(
         private val binding: ErrorStateLayoutBinding,
@@ -71,13 +71,18 @@ abstract class ContentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     class VideoRecord(
         private val binding: VideoItemLayoutBinding,
+        private val navigation: (String) -> Unit,
     ) : ContentViewHolder(binding.root) {
         override fun bind(item: ContentUi) {
-            item.show(binding)
             binding.root.setOnClickListener {
-
+                navigation(item.videoUrl())
             }
         }
     }
 
+}
+
+interface ShowList {
+
+    fun showList(uiState: List<ContentUi>)
 }

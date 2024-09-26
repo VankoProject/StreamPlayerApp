@@ -1,8 +1,8 @@
-package com.kliachenko.presentation.main.uiMapper
+package com.kliachenko.presentation.content.uiMapper
 
 import com.kliachenko.domain.ContentLoadResult
 import com.kliachenko.domain.VideoRecordItem
-import com.kliachenko.presentation.main.ContentUiState
+import com.kliachenko.presentation.content.ContentUiState
 import javax.inject.Inject
 
 class ContentLoadResultMapperImpl @Inject constructor(

@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.kliachenko.presentation.main.customView.CustomImageView
+        <com.kliachenko.presentation.content.customView.CustomImageView
             android:id="@+id/posterImageView"
             android:layout_width="@dimen/poster_width"
             android:layout_height="@dimen/poster_height"
