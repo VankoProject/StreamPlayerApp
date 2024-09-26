@@ -1,6 +1,7 @@
-package com.kliachenko.presentation.main.adapter
+package com.kliachenko.presentation.content.adapter
 
 import com.kliachenko.presentation.databinding.ErrorStateLayoutBinding
+import com.kliachenko.presentation.databinding.ProgressStateLayoutBinding
 import com.kliachenko.presentation.databinding.VideoItemLayoutBinding
 
 interface ContentUi {
@@ -8,6 +9,8 @@ interface ContentUi {
     fun show(binding: ErrorStateLayoutBinding) = Unit
 
     fun show(binding: VideoItemLayoutBinding) = Unit
+
+    fun show(binding: ProgressStateLayoutBinding) = Unit
 
     fun type(): ContentUiViewType
 
@@ -29,7 +32,7 @@ interface ContentUi {
 
         override fun type() = ContentUiViewType.Error
 
-        override fun id(): String = javaClass.simpleName
+        override fun id(): String = javaClass.simpleName + errorMessage
 
         override fun show(binding: ErrorStateLayoutBinding) {
             binding.errorTextView.text = errorMessage

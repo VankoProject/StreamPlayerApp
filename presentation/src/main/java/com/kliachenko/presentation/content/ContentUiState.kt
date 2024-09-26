@@ -1,7 +1,7 @@
-package com.kliachenko.presentation.main
+package com.kliachenko.presentation.content
 
-import com.kliachenko.presentation.main.adapter.ContentUi
-import com.kliachenko.presentation.main.adapter.ShowList
+import com.kliachenko.presentation.content.adapter.ContentUi
+import com.kliachenko.presentation.content.adapter.ShowList
 
 interface ContentUiState {
 

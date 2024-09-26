@@ -2,8 +2,8 @@ package com.kliachenko.streamplayerapp.di.coreModule
 
 import com.kliachenko.data.core.HandleError
 import com.kliachenko.data.core.ProvideResources
+import com.kliachenko.presentation.content.ContentCommunication
 import com.kliachenko.presentation.core.RunAsync
-import com.kliachenko.presentation.main.ContentCommunication
 import com.kliachenko.streamplayerapp.core.ProvideInstance
 import com.kliachenko.streamplayerapp.core.ProvideResourcesImpl
 import dagger.Binds

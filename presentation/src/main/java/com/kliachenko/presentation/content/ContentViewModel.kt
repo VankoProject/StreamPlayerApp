@@ -1,30 +1,30 @@
-package com.kliachenko.presentation.main
+package com.kliachenko.presentation.content
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.kliachenko.domain.ContentLoadResult
 import com.kliachenko.domain.VideoRecordListUseCase
+import com.kliachenko.presentation.content.adapter.ClickActions
 import com.kliachenko.presentation.core.BaseViewModel
 import com.kliachenko.presentation.core.Observe
 import com.kliachenko.presentation.core.RunAsync
-import com.kliachenko.presentation.main.adapter.ClickActions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ContentViewModel @Inject constructor(
     private val videoRecordListUseCase: VideoRecordListUseCase,
-    private val liveDataWrapper: ContentCommunication,
+    private val communication: ContentCommunication,
     private val uiMapper: ContentLoadResult.Mapper<ContentUiState>,
     runAsync: RunAsync
 ): BaseViewModel(runAsync), ClickActions, Observe<ContentUiState> {
 
     fun init() {
-        liveDataWrapper.update(ContentUiState.Progress)
+        communication.update(ContentUiState.Progress)
         runAsyncTask({
             videoRecordListUseCase.execute()
         }) {
-            liveDataWrapper.update(it.map(uiMapper))
+            communication.update(it.map(uiMapper))
         }
     }
 
@@ -33,7 +33,7 @@ class ContentViewModel @Inject constructor(
     }
 
     override fun observe(owner: LifecycleOwner, observer: Observer<ContentUiState>) {
-        liveDataWrapper.observe(owner, observer)
+        communication.observe(owner, observer)
     }
 
 }

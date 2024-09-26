@@ -1,7 +1,7 @@
-package com.kliachenko.presentation.main.uiMapper
+package com.kliachenko.presentation.content.uiMapper
 
 import com.kliachenko.domain.VideoRecordItem
-import com.kliachenko.presentation.main.adapter.ContentUi
+import com.kliachenko.presentation.content.adapter.ContentUi
 import javax.inject.Inject
 
 

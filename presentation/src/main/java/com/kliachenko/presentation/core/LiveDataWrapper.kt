@@ -1,5 +1,6 @@
 package com.kliachenko.presentation.core
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,15 +16,18 @@ interface LiveDataWrapper {
         fun update(value: T)
     }
 
-    interface Mutable<T : Any> : Read<T>, Update<T>, Observe<T>
+    interface Mutable<T: Any> : Read<T>, Update<T>, Observe<T>
 
-    abstract class Abstract<T : Any>(
-        private val liveData: MutableLiveData<T> = MutableLiveData(),
-    ) : Mutable<T> {
+    abstract class Abstract<T: Any>(
+        protected val liveData: MutableLiveData<T> = MutableLiveData(),
+    ): Mutable<T> {
 
-        override fun liveData(): LiveData<T> = liveData
+        override fun liveData(): LiveData<T> {
+            return liveData
+        }
 
         override fun update(value: T) {
+            Log.d("Filmoteka", "Updating LiveData with value: $value")
             liveData.value = value
         }
 
