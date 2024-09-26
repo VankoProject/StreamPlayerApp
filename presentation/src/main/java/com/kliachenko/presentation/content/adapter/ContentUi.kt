@@ -45,6 +45,7 @@ interface ContentUi {
         private val duration: Int,
         private val tags: String,
         private val imageUrl: String,
+        private val videoUrl: String
     ) : ContentUi {
 
         override fun type() = ContentUiViewType.VideoRecord
@@ -57,6 +58,8 @@ interface ContentUi {
             tagsTextView.text = tags
             posterImageView.show(imageUrl)
         }
+
+        override fun videoUrl() = videoUrl
 
     }
 

@@ -19,7 +19,8 @@ class ContentUiMapperImpl @Inject constructor() : VideoRecordItem.Mapper<Content
         videoType = videoType,
         duration = duration,
         tags = tags,
-        imageUrl = imageUrl
+        imageUrl = imageUrl,
+        videoUrl = videoUrl
     )
 
 }
