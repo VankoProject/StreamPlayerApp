@@ -20,7 +20,7 @@
         android:contentDescription="@string/play_video"
         android:src="@drawable/play_ic" />
 
-    <com.kliachenko.presentation.customView.CustomSkipImageButton
+    <com.kliachenko.presentation.customView.CustomPreviousImageButton
         android:id="@+id/exo_prev"
         style="@style/PlayerControlButton"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,7 @@
         android:contentDescription="@string/previous_video"
         android:src="@drawable/skip_previous_ic" />
 
-    <com.kliachenko.presentation.customView.CustomSkipImageButton
+    <com.kliachenko.presentation.customView.CustomNextImageButton
         android:id="@+id/exo_next"
         style="@style/PlayerControlButton"
         app:layout_constraintBottom_toBottomOf="parent"

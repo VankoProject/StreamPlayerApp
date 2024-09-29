@@ -1,6 +1,7 @@
 package com.kliachenko.streamplayerapp.di.coreModule
 
 import com.kliachenko.domain.VideoRecordListUseCase
+import com.kliachenko.domain.VideoUrlMapUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,5 +17,11 @@ abstract class UseCaseModule {
     abstract fun bindVideoRecordListUseCase(
         userCase: VideoRecordListUseCase.Base,
     ): VideoRecordListUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindVideoUrlMapUseCase(
+        useCase: VideoUrlMapUseCase.Base
+    ): VideoUrlMapUseCase
 
 }

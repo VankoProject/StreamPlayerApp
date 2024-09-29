@@ -26,6 +26,9 @@
         <argument
             android:name="videoUrl"
             app:argType="string" />
+        <action
+            android:id="@+id/action_videoPlayerFragment_to_contentFragment"
+            app:destination="@id/contentFragment" />
     </fragment>
 
 

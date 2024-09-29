@@ -7,20 +7,22 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class MediaPlayerModule {
 
     @Binds
     abstract fun bindExoPlayerWrapper(
-        exoPlayer: ExoPlayerWrapper.Base
+        exoPlayerWrapper: ExoPlayerWrapper.Base
     ): ExoPlayerWrapper
 
     companion object {
         @Provides
+        @Singleton
         fun provideExoPlayer(@ApplicationContext context: Context): ExoPlayer {
             return ExoPlayer.Builder(context).build()
         }

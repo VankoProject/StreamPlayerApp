@@ -15,11 +15,11 @@ interface LiveDataWrapper {
         fun update(value: T)
     }
 
-    interface Mutable<T: Any> : Read<T>, Update<T>, Observe<T>
+    interface Mutable<T : Any> : Read<T>, Update<T>, Observe<T>
 
-    abstract class Abstract<T: Any>(
+    abstract class Abstract<T : Any>(
         protected val liveData: MutableLiveData<T> = MutableLiveData(),
-    ): Mutable<T> {
+    ) : Mutable<T> {
 
         override fun liveData(): LiveData<T> {
             return liveData
@@ -32,7 +32,26 @@ interface LiveDataWrapper {
         override fun observe(owner: LifecycleOwner, observer: Observer<T>) {
             liveData.observe(owner, observer)
         }
+
     }
+
+    abstract class Post<T: Any>(
+        protected val liveData: MutableLiveData<T> = MutableLiveData()
+    ): Mutable<T> {
+
+        override fun liveData(): LiveData<T> {
+            return liveData
+        }
+
+        override fun update(value: T) {
+            liveData.postValue(value)
+        }
+
+        override fun observe(owner: LifecycleOwner, observer: Observer<T>) {
+            liveData.observe(owner, observer)
+        }
+    }
+
 }
 
 interface Observe<T : Any> {

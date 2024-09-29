@@ -5,7 +5,7 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageButton
 
-class CustomSkipImageButton : AppCompatImageButton {
+class CustomNextImageButton : AppCompatImageButton {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)

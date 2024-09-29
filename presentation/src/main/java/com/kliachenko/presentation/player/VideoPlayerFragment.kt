@@ -4,13 +4,15 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.OptIn
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.navigation.fragment.findNavController
 import com.kliachenko.presentation.R
+import com.kliachenko.presentation.core.InternetConnectionAvailable
 import com.kliachenko.presentation.databinding.FragmentVideoPlayerBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -24,8 +26,8 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player) {
 
     @Inject
     lateinit var exoPlayer: ExoPlayer
-    private lateinit var mediaItems: List<MediaItem>
-
+    @Inject
+    lateinit var internetConnectionAvailable: InternetConnectionAvailable
     private var isControllerVisible = true
 
     @SuppressLint("ClickableViewAccessibility")
@@ -35,30 +37,20 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player) {
         _binding = FragmentVideoPlayerBinding.bind(view)
         val videoUrl = arguments?.getString("videoUrl") ?: ""
 
-        mediaItems = listOf(
-            MediaItem.fromUri("https://cdn.pixabay.com/video/2024/08/30/228847_small.mp4"),
-            MediaItem.fromUri("https://cdn.pixabay.com/video/2023/07/28/173530-849610807_small.mp4"),
-            MediaItem.fromUri("https://cdn.pixabay.com/video/2022/11/22/140111-774507949_small.mp4"),
-            MediaItem.fromUri("https://cdn.pixabay.com/video/2023/03/09/153976-817104245_small.mp4"),
-            MediaItem.fromUri("https://cdn.pixabay.com/video/2024/09/15/231596_small.mp4")
-        )
-
-        exoPlayer.setMediaItems(mediaItems)
-        exoPlayer.prepare()
-        exoPlayer.playWhenReady = true
-
         val controllerView = binding.customPlayerController
 
         binding.exoPlayerView.useController = false
         binding.exoPlayerView.player = exoPlayer
         binding.exoPlayerView.controllerShowTimeoutMs = 4000
 
+        viewModel.init(videoUrl)
+
         controllerView.exoPrev.setOnClickListener {
-            exoPlayer.seekToPrevious()
+            viewModel.playPrevious()
         }
 
         controllerView.exoNext.setOnClickListener {
-            exoPlayer.seekToNext()
+            viewModel.playNext()
         }
 
         controllerView.exoPlay.setOnClickListener {
@@ -71,19 +63,34 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player) {
             }
         }
 
-        binding.root.setOnTouchListener { v, event ->
+        binding.root.setOnTouchListener { _, event ->
             if (event.action == MotionEvent.ACTION_DOWN) {
-                if(!isControllerVisible) {
-                    binding.customPlayerController.rootControllerLayout.visibility = View.INVISIBLE
+                if (!isControllerVisible) {
+                    controllerView.rootControllerLayout.visibility = View.INVISIBLE
                 } else {
-                    binding.customPlayerController.rootControllerLayout.visibility = View.VISIBLE
+                    controllerView.rootControllerLayout.visibility = View.VISIBLE
                 }
                 isControllerVisible = !isControllerVisible
             }
             true
         }
-    }
 
+        viewModel.internetConnection().observe(viewLifecycleOwner) { hasInternet ->
+            binding.networkStatusBanner.connectionCardView.visibility =
+                if (hasInternet) View.GONE else View.VISIBLE
+        }
+
+        viewModel.observe(viewLifecycleOwner) { uiState ->
+            uiState.update(binding)
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    findNavController().navigate(R.id.action_videoPlayerFragment_to_contentFragment)
+                }
+            })
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
