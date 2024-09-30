@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="error">#DE3E3E</color>
+    <color name="skyBlue">#2F479B</color>
+    <color name="darkGraphite">#0B0B0C</color>
+    <color name="coal">#111113</color>
+    <color name="darkGrey">#7C7C7A</color>
+    <color name="milk">#D0D0D0</color>
+</resources>

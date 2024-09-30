@@ -1,0 +1,22 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.StreamPlayerApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+    <!-- Base application theme. -->
+
+    <style name="ProgressBarStyle" parent="Widget.AppCompat.ProgressBar" >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:indeterminateTint">@color/skyBlue</item>
+    </style>
+
+    <style name="PlayerControlButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/small_margin</item>
+    </style>
+
+    <style name="Theme.StreamPlayerApp" parent="Base.Theme.StreamPlayerApp" />
+</resources>
