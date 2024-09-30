@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.annotation.OptIn
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -26,9 +25,9 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player) {
 
     @Inject
     lateinit var exoPlayer: ExoPlayer
+
     @Inject
     lateinit var internetConnectionAvailable: InternetConnectionAvailable
-    private var isControllerVisible = true
 
     @SuppressLint("ClickableViewAccessibility")
     @OptIn(UnstableApi::class)
@@ -37,59 +36,52 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player) {
         _binding = FragmentVideoPlayerBinding.bind(view)
         val videoUrl = arguments?.getString("videoUrl") ?: ""
 
-        val controllerView = binding.customPlayerController
+        with(binding) {
+            exoPlayerView.useController = false
+            exoPlayerView.player = exoPlayer
 
-        binding.exoPlayerView.useController = false
-        binding.exoPlayerView.player = exoPlayer
-        binding.exoPlayerView.controllerShowTimeoutMs = 4000
+            viewModel.init(videoUrl = videoUrl, isFirstRun = savedInstanceState == null)
 
-        viewModel.init(videoUrl)
+            customPlayerController.exoPrev.setOnClickListener {
+                viewModel.playPrevious()
+            }
 
-        controllerView.exoPrev.setOnClickListener {
-            viewModel.playPrevious()
-        }
+            customPlayerController.exoNext.setOnClickListener {
+                viewModel.playNext()
+            }
 
-        controllerView.exoNext.setOnClickListener {
-            viewModel.playNext()
-        }
+            customPlayerController.exoPlay.setOnClickListener {
+                viewModel.playOrPause()
+            }
 
-        controllerView.exoPlay.setOnClickListener {
-            if (exoPlayer.isPlaying) {
-                exoPlayer.pause()
-                controllerView.exoPlay.changeStatusIcon(exoPlayer.isPlaying)
-            } else {
-                exoPlayer.play()
-                controllerView.exoPlay.changeStatusIcon(exoPlayer.isPlaying)
+            serverErrorBanner.retryErrorButton.setOnClickListener {
+                findNavController().popBackStack()
+            }
+
+            viewModel.internetConnection().observe(viewLifecycleOwner) { hasInternet ->
+                binding.networkStatusBanner.connectionCardView.visibility =
+                    if (hasInternet) View.GONE else View.VISIBLE
+            }
+
+            viewModel.playerState().observe(viewLifecycleOwner) { uiState ->
+                uiState.update(binding)
+                exoPlayerView.setOnTouchListener { _, event ->
+                    if (uiState is PlayerUiState.PlayerControl
+                        && event.action == MotionEvent.ACTION_DOWN
+                    ) {
+                        with(customPlayerController.rootControllerLayout) {
+                            visibility = if (visibility == View.VISIBLE) {
+                                View.GONE
+                            } else {
+                                View.VISIBLE
+                            }
+                        }
+                    }
+                    true
+                }
             }
         }
 
-        binding.root.setOnTouchListener { _, event ->
-            if (event.action == MotionEvent.ACTION_DOWN) {
-                if (!isControllerVisible) {
-                    controllerView.rootControllerLayout.visibility = View.INVISIBLE
-                } else {
-                    controllerView.rootControllerLayout.visibility = View.VISIBLE
-                }
-                isControllerVisible = !isControllerVisible
-            }
-            true
-        }
-
-        viewModel.internetConnection().observe(viewLifecycleOwner) { hasInternet ->
-            binding.networkStatusBanner.connectionCardView.visibility =
-                if (hasInternet) View.GONE else View.VISIBLE
-        }
-
-        viewModel.observe(viewLifecycleOwner) { uiState ->
-            uiState.update(binding)
-        }
-
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    findNavController().navigate(R.id.action_videoPlayerFragment_to_contentFragment)
-                }
-            })
     }
 
     override fun onDestroyView() {

@@ -34,4 +34,12 @@ class ContentRepositoryImpl @Inject constructor(
         }
 
     }
+
+    override suspend fun videoUrlMap(): List<String> {
+        val videoRecords = cacheDataSource.read()
+        val videoUrlList: List<String> = videoRecords.map { record ->
+            record.videoUrl
+        }
+        return videoUrlList
+    }
 }

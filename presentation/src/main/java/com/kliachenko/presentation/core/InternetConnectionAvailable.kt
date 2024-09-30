@@ -12,7 +12,6 @@ class InternetConnectionAvailable @Inject constructor(
     private val communication: ConnectionCommunication,
     context: Context,
 ) {
-
     private val networkRequest = NetworkRequest.Builder()
         .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
         .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)

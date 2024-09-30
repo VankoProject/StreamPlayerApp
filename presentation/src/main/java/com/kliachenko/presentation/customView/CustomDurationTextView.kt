@@ -1,4 +1,4 @@
-package com.kliachenko.presentation.content.customView
+package com.kliachenko.presentation.customView
 
 import android.annotation.SuppressLint
 import android.content.Context

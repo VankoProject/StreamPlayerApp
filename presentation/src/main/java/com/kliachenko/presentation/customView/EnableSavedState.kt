@@ -31,4 +31,5 @@ class EnableSavedState: View.BaseSavedState {
         override fun createFromParcel(source: Parcel) = EnableSavedState(source)
         override fun newArray(size: Int): Array<EnableSavedState?> = arrayOfNulls(size)
     }
+
 }

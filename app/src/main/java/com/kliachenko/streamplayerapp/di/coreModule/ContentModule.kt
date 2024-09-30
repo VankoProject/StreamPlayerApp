@@ -49,4 +49,5 @@ abstract class ContentModule {
             cacheDataSource, loadVideoRecordCloudDataSource, mapToCache, mapToDomain, handleError
         )
     }
+
 }

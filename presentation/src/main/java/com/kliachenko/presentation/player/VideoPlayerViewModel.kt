@@ -1,11 +1,8 @@
 package com.kliachenko.presentation.player
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import com.kliachenko.domain.VideoUrlMapUseCase
 import com.kliachenko.presentation.core.BaseViewModel
 import com.kliachenko.presentation.core.InternetConnectionAvailable
-import com.kliachenko.presentation.core.Observe
 import com.kliachenko.presentation.core.RunAsync
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -18,13 +15,15 @@ class VideoPlayerViewModel @Inject constructor(
     private val connectionCommunication: ConnectionCommunication,
     private val player: ExoPlayerWrapper,
     runAsync: RunAsync,
-) : BaseViewModel(runAsync), Observe<PlayerUiState> {
+) : BaseViewModel(runAsync) {
 
     fun internetConnection() = connectionCommunication.liveData()
 
+    fun playerState() = communication.liveData()
+
     init {
         connectionCommunication.liveData().observeForever { isConnected ->
-            if(isConnected) {
+            if (isConnected) {
                 player.startWork()
             } else {
                 player.pause()
@@ -35,18 +34,20 @@ class VideoPlayerViewModel @Inject constructor(
     private var actualVideoList: List<String> = emptyList()
     private var currentVideoIndex: Int = 0
 
-    fun init(videoUrl: String) {
-        if (actualVideoList.isEmpty()) {
-            runAsyncTask({
-                videoUrlMapUseCase.execute()
-            }) { urls ->
-                actualVideoList = urls
-                player.setMediaItems(actualVideoList)
-                currentVideoIndex = actualVideoList.indexOf(videoUrl)
+    fun init(videoUrl: String, isFirstRun: Boolean) {
+        if (isFirstRun) {
+            if (actualVideoList.isEmpty()) {
+                runAsyncTask({
+                    videoUrlMapUseCase.execute()
+                }) { urls ->
+                    actualVideoList = urls
+                    player.setMediaItems(actualVideoList)
+                    currentVideoIndex = actualVideoList.indexOf(videoUrl)
+                    player.playCurrent(currentVideoIndex)
+                }
+            } else {
                 player.playCurrent(currentVideoIndex)
             }
-        } else {
-            player.playCurrent(currentVideoIndex)
         }
     }
 
@@ -58,8 +59,8 @@ class VideoPlayerViewModel @Inject constructor(
         player.previousVideo()
     }
 
-    override fun observe(owner: LifecycleOwner, observer: Observer<PlayerUiState>) {
-        communication.observe(owner, observer)
+    fun playOrPause() {
+        player.playOrPause()
     }
 
 }

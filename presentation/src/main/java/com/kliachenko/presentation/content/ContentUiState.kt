@@ -25,7 +25,6 @@ interface ContentUiState {
         override fun updateAdapter(adapter: ShowList) {
             adapter.showList(itemList)
         }
-
     }
 
 }

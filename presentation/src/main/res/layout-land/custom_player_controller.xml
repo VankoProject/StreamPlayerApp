@@ -8,7 +8,8 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="horizontal"
-    tools:background="@color/darkGraphite">
+    tools:background="@color/darkGraphite"
+    tools:ignore="MissingDefaultResource">
 
     <com.kliachenko.presentation.customView.CustomPlayImageButton
         android:id="@+id/exo_play"
@@ -24,7 +25,7 @@
     <com.kliachenko.presentation.customView.CustomPreviousImageButton
         android:id="@+id/exo_prev"
         style="@style/PlayerControlButton"
-        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginStart="@dimen/button_controller_margin"
         android:background="@drawable/rounded_button"
         android:contentDescription="@string/previous_video"
         android:src="@drawable/previous_active_ic"
@@ -35,7 +36,7 @@
     <com.kliachenko.presentation.customView.CustomNextImageButton
         android:id="@+id/exo_next"
         style="@style/PlayerControlButton"
-        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/button_controller_margin"
         android:background="@drawable/rounded_button"
         android:contentDescription="@string/next_video"
         android:src="@drawable/next_active_ic"

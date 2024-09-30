@@ -19,12 +19,15 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         _binding = FragmentContentBinding.bind(view)
+
         val adapter = ContentAdapter(clickActions = viewModel, navigation = { videoUrl ->
             val action =
                 ContentFragmentDirections.actionContentFragmentToVideoPlayerFragment(videoUrl)
             findNavController().navigate(action)
         })
+
         binding.contentRecyclerView.adapter = adapter
 
         viewModel.observe(viewLifecycleOwner) { uiState ->
@@ -39,4 +42,5 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
         super.onDestroy()
         _binding = null
     }
+
 }

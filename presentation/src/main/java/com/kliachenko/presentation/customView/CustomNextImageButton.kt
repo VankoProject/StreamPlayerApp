@@ -1,9 +1,12 @@
 package com.kliachenko.presentation.customView
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.os.Parcelable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageButton
+import androidx.core.content.ContextCompat
+import com.kliachenko.presentation.R
 
 class CustomNextImageButton : AppCompatImageButton {
 
@@ -15,8 +18,16 @@ class CustomNextImageButton : AppCompatImageButton {
         defStyleAttr
     )
 
-    fun show(isLast: Boolean) {
-        isEnabled = !isLast
+    init {
+        setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN)
+    }
+
+    private var currentIconResId: Int = R.drawable.next_active_ic
+
+    fun showNext(hasNext: Boolean) {
+        currentIconResId = if (hasNext) R.drawable.next_active_ic else R.drawable.next_disable_ic
+        setImageResource(currentIconResId)
+        isEnabled = hasNext
     }
 
     override fun onSaveInstanceState(): Parcelable? {
@@ -31,6 +42,7 @@ class CustomNextImageButton : AppCompatImageButton {
         super.onRestoreInstanceState(state)
         if (state is EnableSavedState) {
             isEnabled = state.restoreIsEnabled()
+            showNext(isEnabled)
         }
     }
 }

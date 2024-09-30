@@ -1,9 +1,11 @@
 package com.kliachenko.presentation.customView
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.os.Parcelable
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageButton
+import androidx.core.content.ContextCompat
 import com.kliachenko.presentation.R
 
 class CustomPlayImageButton : AppCompatImageButton {
@@ -15,6 +17,10 @@ class CustomPlayImageButton : AppCompatImageButton {
         attrs,
         defStyleAttr
     )
+
+    init {
+        setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN)
+    }
 
     private var currentIconResId: Int = R.drawable.pause_ic
 

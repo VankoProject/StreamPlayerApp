@@ -17,7 +17,6 @@ interface LoadVideoRecordCloudDataSource {
         }
     }
 
-
     class Fake @Inject constructor() : LoadVideoRecordCloudDataSource {
 
         private var firstTime: Boolean = true
@@ -68,6 +67,6 @@ interface LoadVideoRecordCloudDataSource {
                 )
             )
         }
-
     }
+
 }

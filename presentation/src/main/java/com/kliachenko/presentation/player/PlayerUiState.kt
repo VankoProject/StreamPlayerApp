@@ -1,60 +1,46 @@
-//package com.kliachenko.presentation.player
-//
-//import android.view.View
-//import com.kliachenko.presentation.databinding.FragmentVideoPlayerBinding
-//
-//
-//interface PlayerUiState {
-//
-//    fun update(binding: FragmentVideoPlayerBinding)
-//
-//    class Play(
-//        private val isFirst: Boolean, private val isLast: Boolean, private val isPlaying: Boolean,
-//    ) : PlayerUiState {
-//        override fun update(
-//            binding: FragmentVideoPlayerBinding,
-//        ) {
-//            binding.playButton.changeStatusIcon(isPlaying)
-//            binding.nextVideoButton.show(isLast)
-//            binding.previousVideoButton.show(isFirst)
-//            binding.videoProgressBar.visibility = View.INVISIBLE
-//        }
-//    }
-//
-//    class Stop(
-//        private val isFirst: Boolean, private val isLast: Boolean, private val isPlaying: Boolean,
-//    ) : PlayerUiState {
-//        override fun update(binding: FragmentVideoPlayerBinding) {
-//            binding.playButton.changeStatusIcon(isPlaying)
-//            binding.nextVideoButton.show(isLast)
-//            binding.previousVideoButton.show(isFirst)
-//            binding.videoProgressBar.visibility = View.INVISIBLE
-//        }
-//    }
-//
-//    class Buffering(
-//        private val isFirst: Boolean, private val isLast: Boolean, private val isPlaying: Boolean,
-//    ) : PlayerUiState {
-//        override fun update(
-//            binding: FragmentVideoPlayerBinding,
-//        ) {
-//            binding.playButton.visibility = View.INVISIBLE
-//            binding.nextVideoButton.show(isLast)
-//            binding.previousVideoButton.show(isFirst)
-//            binding.videoProgressBar.visibility = View.VISIBLE
-//        }
-//    }
-//
-//    object Hide : PlayerUiState {
-//        override fun update(binding: FragmentVideoPlayerBinding) {
-//            binding.PlayerControllerView.visibility = View.INVISIBLE
-//        }
-//    }
-//
-//    object Show : PlayerUiState {
-//        override fun update(binding: FragmentVideoPlayerBinding) {
-//            binding.PlayerControllerView.visibility = View.VISIBLE
-//        }
-//    }
-//
-//}
+package com.kliachenko.presentation.player
+
+import android.view.View
+import com.kliachenko.presentation.databinding.FragmentVideoPlayerBinding
+
+interface PlayerUiState {
+
+    fun update(binding: FragmentVideoPlayerBinding)
+
+    object Progress : PlayerUiState {
+        override fun update(binding: FragmentVideoPlayerBinding) = with(binding) {
+            customPlayerController.rootControllerLayout.visibility = View.INVISIBLE
+            serverErrorBanner.rootErrorPlayerLayout.visibility = View.INVISIBLE
+            playerProgressBar.visibility = View.VISIBLE
+            customPlayerController.rootControllerLayout.isClickable = false
+        }
+    }
+
+    data class Notification(private val message: String) : PlayerUiState {
+        override fun update(binding: FragmentVideoPlayerBinding) = with(binding) {
+            serverErrorBanner.errorServerTextView.changeText(message)
+            serverErrorBanner.rootErrorPlayerLayout.visibility = View.VISIBLE
+            customPlayerController.rootControllerLayout.visibility = View.GONE
+            playerProgressBar.visibility = View.GONE
+            customPlayerController.rootControllerLayout.isClickable = false
+        }
+    }
+
+    data class PlayerControl(
+        private val hasNext: Boolean,
+        private val hasPrevious: Boolean,
+        private val isPlaying: Boolean,
+    ) : PlayerUiState {
+        override fun update(binding: FragmentVideoPlayerBinding) = with(binding) {
+            serverErrorBanner.rootErrorPlayerLayout.visibility = View.GONE
+            playerProgressBar.visibility = View.GONE
+            with(customPlayerController) {
+                rootPlayerLayout.visibility = View.VISIBLE
+                exoPlay.changeStatusIcon(playing = isPlaying)
+                exoNext.showNext(hasNext)
+                exoPrev.showPrevious(hasPrevious)
+            }
+        }
+    }
+
+}
