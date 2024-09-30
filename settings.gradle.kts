@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "StreamPlayerApp"
 include(":app")
- 
+include(":domain")
+include(":data")
+include(":presentation")

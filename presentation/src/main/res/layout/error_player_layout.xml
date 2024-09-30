@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootErrorPlayerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <com.kliachenko.presentation.customView.CustomNotificationTextView
+        android:id="@+id/errorServerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/large_margin"
+        android:gravity="center"
+        android:textColor="@color/darkGrey"
+        android:textSize="@dimen/xx_medium_text"
+        android:textStyle="normal"
+        tools:text="@string/api_rate_limit_exceeded" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/retryErrorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/skyBlue"
+        android:contentDescription="@string/go_back_to_video_list"
+        android:text="@string/go_back"
+        android:textColor="@color/white" />
+
+</LinearLayout>
