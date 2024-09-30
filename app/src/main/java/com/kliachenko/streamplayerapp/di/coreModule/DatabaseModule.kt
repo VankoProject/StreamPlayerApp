@@ -28,4 +28,5 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun provideVideoRecordDao(dataBase: VideoRecordDataBase) = dataBase.videoRecordDao()
+
 }

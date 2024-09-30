@@ -3,6 +3,9 @@ package com.kliachenko.domain
 interface ContentRepository {
 
     suspend fun videoRecordsItems(): ContentLoadResult
+
+    suspend fun videoUrlMap(): List<String>
+
 }
 
 interface ContentLoadResult {

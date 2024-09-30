@@ -61,41 +61,44 @@ class ContentUseCaseTest {
 
         assertEquals(expected, actual)
     }
+}
 
-    private class FakeContentRepository : ContentRepository {
+private class FakeContentRepository : ContentRepository {
 
-        private var actualResult: ContentLoadResult = ContentLoadResult.Empty
+    private var actualResult: ContentLoadResult = ContentLoadResult.Empty
 
-        fun hasError() {
-            actualResult = ContentLoadResult.Error("No internet connection")
-        }
-
-        fun hasData() {
-            actualResult = ContentLoadResult.Success(
-                listOf(
-                    VideoRecordItem.Base(
-                        id = 0,
-                        videoType = "film",
-                        duration = 90,
-                        tags = "natural",
-                        videoUrl = "https://example.com/videoUrl0",
-                        imageUrl = "https://example.com/imageUrl0"
-                    ),
-                    VideoRecordItem.Base(
-                        id = 1,
-                        videoType = "clip",
-                        duration = 120,
-                        tags = "urban",
-                        videoUrl = "https://example.com/videoUrl1",
-                        imageUrl = "https://example.com/imageUrl1"
-                    )
-                )
-            )
-        }
-
-        override suspend fun videoRecordsItems(): ContentLoadResult {
-            return actualResult
-        }
+    fun hasError() {
+        actualResult = ContentLoadResult.Error("No internet connection")
     }
 
+    fun hasData() {
+        actualResult = ContentLoadResult.Success(
+            listOf(
+                VideoRecordItem.Base(
+                    id = 0,
+                    videoType = "film",
+                    duration = 90,
+                    tags = "natural",
+                    videoUrl = "https://example.com/videoUrl0",
+                    imageUrl = "https://example.com/imageUrl0"
+                ),
+                VideoRecordItem.Base(
+                    id = 1,
+                    videoType = "clip",
+                    duration = 120,
+                    tags = "urban",
+                    videoUrl = "https://example.com/videoUrl1",
+                    imageUrl = "https://example.com/imageUrl1"
+                )
+            )
+        )
+    }
+
+    override suspend fun videoRecordsItems(): ContentLoadResult {
+        return actualResult
+    }
+
+    override suspend fun videoUrlMap(): List<String> {
+        return emptyList()
+    }
 }

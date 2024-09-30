@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/connectionCardView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/darkGrey"
+    app:cardCornerRadius="@dimen/corner_radius_standard"
+    app:cardElevation="@dimen/elevation_standard">
+
+    <LinearLayout
+        android:id="@+id/rootConnectionView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/large_padding"
+        android:paddingEnd="@dimen/large_padding">
+
+        <ImageView
+            android:id="@+id/connectionIconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/wifi_off_ic" />
+
+        <TextView
+            android:id="@+id/connectionErrorTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            android:text="@string/no_internet_connection"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/x_medium_text" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -27,4 +27,5 @@ abstract class PresentationModule {
     abstract fun bindContentUiMapper(
         mapper: ContentUiMapperImpl,
     ): VideoRecordItem.Mapper<ContentUi>
+
 }

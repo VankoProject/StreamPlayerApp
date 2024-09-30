@@ -8,6 +8,7 @@ interface VideoRecordMapper<T : Any> {
 
     fun map(
         id: Int,
+        videoId: Int,
         videoType: String,
         duration: Int,
         tags: String,
@@ -19,6 +20,7 @@ interface VideoRecordMapper<T : Any> {
         class Base @Inject constructor() : ToCache {
             override fun map(
                 id: Int,
+                videoId: Int,
                 videoType: String,
                 duration: Int,
                 tags: String,
@@ -26,6 +28,7 @@ interface VideoRecordMapper<T : Any> {
                 imageUrl: String,
             ) = VideoRecordCache(
                 id = id,
+                videoId= videoId,
                 videoType = videoType,
                 duration = duration,
                 tags = tags,
@@ -39,6 +42,7 @@ interface VideoRecordMapper<T : Any> {
         class Base @Inject constructor() : ToDomain {
             override fun map(
                 id: Int,
+                videoId: Int,
                 videoType: String,
                 duration: Int,
                 tags: String,

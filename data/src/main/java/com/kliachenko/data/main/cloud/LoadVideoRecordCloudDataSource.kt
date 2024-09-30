@@ -17,7 +17,6 @@ interface LoadVideoRecordCloudDataSource {
         }
     }
 
-
     class Fake @Inject constructor() : LoadVideoRecordCloudDataSource {
 
         private var firstTime: Boolean = true
@@ -35,7 +34,7 @@ interface LoadVideoRecordCloudDataSource {
                         duration = 13,
                         tags = "animals",
                         videos = Videos(
-                            large = Large(
+                            medium = Medium(
                                 videoUrl = "https://example.com/videoUrl0",
                                 imageUrl = "https://example.com/imageUrl0"
                             )
@@ -47,7 +46,7 @@ interface LoadVideoRecordCloudDataSource {
                         duration = 25,
                         tags = "industry",
                         videos = Videos(
-                            large = Large(
+                            medium = Medium(
                                 videoUrl = "https://example.com/videoUrl1",
                                 imageUrl = "https://example.com/imageUrl1"
                             )
@@ -59,7 +58,7 @@ interface LoadVideoRecordCloudDataSource {
                         duration = 30,
                         tags = "people",
                         videos = Videos(
-                            large = Large(
+                            medium = Medium(
                                 videoUrl = "https://example.com/videoUrl2",
                                 imageUrl = "https://example.com/imageUrl2"
                             )
@@ -68,6 +67,6 @@ interface LoadVideoRecordCloudDataSource {
                 )
             )
         }
-
     }
+
 }

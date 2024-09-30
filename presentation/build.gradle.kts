@@ -70,4 +70,9 @@ dependencies {
     implementation(libs.androidx.navigation.ui)
     androidTestImplementation(libs.androidx.navigation.testing)
 
+    //ExoPlayer
+    api(libs.androidx.media3.exoplayer)
+    api(libs.androidx.media3.exoplayer.dash)
+    api(libs.androidx.media3.ui)
+
 }

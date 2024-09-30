@@ -23,21 +23,22 @@ data class Result(
 ) : MapVideoRecord {
     override fun <T : Any> map(mapper: VideoRecordMapper<T>) =
         mapper.map(
-            id = id,
+            id = 0,
+            videoId = id,
             videoType = videoType,
             duration = duration,
             tags = tags,
-            videoUrl = videos.large.videoUrl,
-            imageUrl = videos.large.imageUrl
+            videoUrl = videos.medium.videoUrl,
+            imageUrl = videos.medium.imageUrl
         )
 }
 
 data class Videos(
     @SerializedName("large")
-    val large: Large,
+    val medium: Medium,
 )
 
-data class Large(
+data class Medium(
     @SerializedName("url")
     val videoUrl: String,
     @SerializedName("thumbnail")

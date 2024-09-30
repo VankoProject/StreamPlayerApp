@@ -1,6 +1,6 @@
 package com.kliachenko.presentation.core
 
-import com.kliachenko.presentation.content.customView.CustomImageView
+import com.kliachenko.presentation.customView.CustomImageView
 import com.squareup.picasso.Picasso
 
 interface ImageCloudLoader {

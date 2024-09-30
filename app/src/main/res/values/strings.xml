@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">StreamPlayerApp</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="service_unavailable">Service is currently unavailable</string>

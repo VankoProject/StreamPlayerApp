@@ -10,8 +10,9 @@ import com.kliachenko.data.mapper.VideoRecordMapper
 data class VideoRecordCache(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo("id")
     val id: Int,
+    @ColumnInfo(name = "video_id")
+    val videoId: Int,
     @ColumnInfo(name = "video_type")
     val videoType: String,
     @ColumnInfo(name = "duration")
@@ -24,5 +25,5 @@ data class VideoRecordCache(
     val imageUrl: String,
 ) : MapVideoRecord {
     override fun <T : Any> map(mapper: VideoRecordMapper<T>): T =
-        mapper.map(id, videoType, duration, tags, videoUrl, imageUrl)
+        mapper.map(id, videoId, videoType, duration, tags, videoUrl, imageUrl)
 }

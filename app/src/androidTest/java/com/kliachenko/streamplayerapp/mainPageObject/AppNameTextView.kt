@@ -22,7 +22,7 @@ class AppNameTextView(
 ) {
 
     private val textColor =
-        ContextCompat.getColor(uiContext, com.kliachenko.presentation.R.color.white)
+        ContextCompat.getColor(uiContext, com.kliachenko.presentation.R.color.skyBlue)
     private val text =
         uiContext.getText(com.kliachenko.presentation.R.string.app_title_name).toString()
     private val appNameTextView: Int = com.kliachenko.presentation.R.id.appNameTextView
