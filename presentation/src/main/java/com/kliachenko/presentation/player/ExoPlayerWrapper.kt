@@ -22,8 +22,6 @@ interface ExoPlayerWrapper {
 
     fun updatePlayUiState(isPlaying: Boolean)
 
-    fun play()
-
     fun pause()
 
     fun startWork()
@@ -36,22 +34,24 @@ interface ExoPlayerWrapper {
     ) : ExoPlayerWrapper {
 
         private var mediaList = emptyList<MediaItem>()
-        private var currentPosition: Int = 0
 
         private val playerStateListener = object : Player.Listener {
             @SuppressLint("SwitchIntDef")
             override fun onPlaybackStateChanged(playbackState: Int) {
                 when (playbackState) {
-                    Player.STATE_BUFFERING ->
+                    Player.STATE_BUFFERING -> {
                         communication.update(PlayerUiState.Progress)
+                    }
 
-                    Player.STATE_READY -> communication.update(
-                        PlayerUiState.PlayerControl(
-                            isPlaying = exoPlayer.isPlaying,
-                            hasNext = exoPlayer.hasNextMediaItem(),
-                            hasPrevious = exoPlayer.hasPreviousMediaItem()
+                    Player.STATE_READY -> {
+                        communication.update(
+                            PlayerUiState.PlayerControl(
+                                isPlaying = exoPlayer.isPlaying,
+                                hasNext = exoPlayer.hasNextMediaItem(),
+                                hasPrevious = exoPlayer.hasPreviousMediaItem()
+                            )
                         )
-                    )
+                    }
 
                     Player.STATE_ENDED -> {
                         if (exoPlayer.repeatMode == ExoPlayer.REPEAT_MODE_ALL) {
@@ -89,10 +89,6 @@ interface ExoPlayerWrapper {
             exoPlayer.prepare()
         }
 
-        override fun play() {
-            exoPlayer.play()
-        }
-
         override fun pause() {
             exoPlayer.pause()
         }
@@ -107,35 +103,28 @@ interface ExoPlayerWrapper {
         override fun playOrPause() {
             if (exoPlayer.isPlaying) {
                 exoPlayer.pause()
-                updatePlayUiState(exoPlayer.isPlaying)
             } else {
                 exoPlayer.play()
-                updatePlayUiState(exoPlayer.isPlaying)
             }
+            updatePlayUiState(exoPlayer.isPlaying)
         }
 
         override fun nextVideo() {
-            if (currentPosition < mediaList.size - 1) {
-                currentPosition++
+            if (exoPlayer.hasNextMediaItem())
                 exoPlayer.seekToNext()
-                exoPlayer.playWhenReady = true
-            }
+            exoPlayer.playWhenReady = true
         }
 
         override fun previousVideo() {
-            if (currentPosition > 0) {
-                currentPosition--
+            if (exoPlayer.hasPreviousMediaItem())
                 exoPlayer.seekToPrevious()
-                exoPlayer.playWhenReady = true
-            }
+            exoPlayer.playWhenReady = true
         }
 
         override fun playCurrent(position: Int) {
-            if (position in mediaList.indices) {
-                currentPosition = position
+            if (position in mediaList.indices)
                 exoPlayer.seekTo(position, 0)
-                exoPlayer.playWhenReady = true
-            }
+            exoPlayer.playWhenReady = true
         }
 
         override fun updatePlayUiState(isPlaying: Boolean) {

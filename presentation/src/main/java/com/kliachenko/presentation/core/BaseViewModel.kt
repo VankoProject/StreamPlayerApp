@@ -3,6 +3,7 @@ package com.kliachenko.presentation.core
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -29,20 +30,26 @@ interface RunAsync {
         coroutineScope: CoroutineScope,
         background: suspend () -> T,
         uiBlock: (T) -> Unit,
-    )
+        job: Job? = null
+    ): Job
 
     class Base @Inject constructor(): RunAsync {
         override fun <T : Any> startAsyncTask(
             coroutineScope: CoroutineScope,
             background: suspend () -> T,
             uiBlock: (T) -> Unit,
-        ) {
-            coroutineScope.launch(Dispatchers.IO) {
+            job: Job?
+        ): Job {
+
+            job?.cancel()
+
+            val newJob = coroutineScope.launch(Dispatchers.IO) {
                 val result = background.invoke()
                 withContext(Dispatchers.Main) {
                     uiBlock.invoke(result)
                 }
             }
+            return newJob
         }
     }
 

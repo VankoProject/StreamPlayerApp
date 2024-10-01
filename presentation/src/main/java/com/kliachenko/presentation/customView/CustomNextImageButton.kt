@@ -19,15 +19,20 @@ class CustomNextImageButton : AppCompatImageButton {
     )
 
     init {
-        setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN)
+        setImageResource(R.drawable.next_active_ic)
     }
 
-    private var currentIconResId: Int = R.drawable.next_active_ic
-
     fun showNext(hasNext: Boolean) {
-        currentIconResId = if (hasNext) R.drawable.next_active_ic else R.drawable.next_disable_ic
-        setImageResource(currentIconResId)
         isEnabled = hasNext
+        if (isEnabled) setColorFilter(
+            ContextCompat.getColor(context, R.color.white),
+            PorterDuff.Mode.SRC_IN
+        )
+        else setColorFilter(
+            ContextCompat.getColor(context, R.color.stoneBrown),
+            PorterDuff.Mode.SRC_IN
+        )
+
     }
 
     override fun onSaveInstanceState(): Parcelable? {

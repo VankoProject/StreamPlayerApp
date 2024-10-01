@@ -1,5 +1,6 @@
 package com.kliachenko.presentation.player
 
+import android.annotation.SuppressLint
 import android.view.View
 import com.kliachenko.presentation.databinding.FragmentVideoPlayerBinding
 
@@ -12,6 +13,7 @@ interface PlayerUiState {
             customPlayerController.rootControllerLayout.visibility = View.INVISIBLE
             serverErrorBanner.rootErrorPlayerLayout.visibility = View.INVISIBLE
             playerProgressBar.visibility = View.VISIBLE
+            exoPlayerView.visibility = View.VISIBLE
             customPlayerController.rootControllerLayout.isClickable = false
         }
     }
@@ -31,11 +33,11 @@ interface PlayerUiState {
         private val hasPrevious: Boolean,
         private val isPlaying: Boolean,
     ) : PlayerUiState {
+        @SuppressLint("ClickableViewAccessibility")
         override fun update(binding: FragmentVideoPlayerBinding) = with(binding) {
             serverErrorBanner.rootErrorPlayerLayout.visibility = View.GONE
             playerProgressBar.visibility = View.GONE
             with(customPlayerController) {
-                rootPlayerLayout.visibility = View.VISIBLE
                 exoPlay.changeStatusIcon(playing = isPlaying)
                 exoNext.showNext(hasNext)
                 exoPrev.showPrevious(hasPrevious)

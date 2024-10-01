@@ -59,29 +59,33 @@ class VideoPlayerFragment : Fragment(R.layout.fragment_video_player) {
             }
 
             viewModel.internetConnection().observe(viewLifecycleOwner) { hasInternet ->
-                binding.networkStatusBanner.connectionCardView.visibility =
+                networkStatusBanner.connectionCardView.visibility =
                     if (hasInternet) View.GONE else View.VISIBLE
+                if (hasInternet) viewModel.startWork() else viewModel.pause()
+            }
+
+            viewModel.showController().observe(viewLifecycleOwner) { isVisible ->
+                binding.customPlayerController.rootControllerLayout.visibility =
+                    if (isVisible) View.VISIBLE else View.GONE
             }
 
             viewModel.playerState().observe(viewLifecycleOwner) { uiState ->
                 uiState.update(binding)
-                exoPlayerView.setOnTouchListener { _, event ->
-                    if (uiState is PlayerUiState.PlayerControl
-                        && event.action == MotionEvent.ACTION_DOWN
-                    ) {
-                        with(customPlayerController.rootControllerLayout) {
-                            visibility = if (visibility == View.VISIBLE) {
-                                View.GONE
+                if(uiState is PlayerUiState.PlayerControl) {
+                    binding.rootPlayerLayout.setOnTouchListener { _, event ->
+                        if (event.action == MotionEvent.ACTION_DOWN) {
+                            if (customPlayerController.rootControllerLayout.visibility == View.VISIBLE) {
+                                viewModel.hideController()
                             } else {
-                                View.VISIBLE
+                                viewModel.showControllerAndStartTimer()
                             }
+
                         }
+                        true
                     }
-                    true
                 }
             }
         }
-
     }
 
     override fun onDestroyView() {

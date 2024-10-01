@@ -19,15 +19,19 @@ class CustomPreviousImageButton : AppCompatImageButton {
     )
 
     init {
-        setColorFilter(ContextCompat.getColor(context, R.color.white), PorterDuff.Mode.SRC_IN)
+        setImageResource(R.drawable.previous_active_ic)
     }
 
-    private var currentIconResId: Int = R.drawable.previous_active_ic
-
     fun showPrevious(hasPrevious: Boolean) {
-        currentIconResId = if (hasPrevious) R.drawable.previous_active_ic else R.drawable.previous_disable_ic
-        setImageResource(currentIconResId)
         isEnabled = hasPrevious
+        if (isEnabled) setColorFilter(
+            ContextCompat.getColor(context, R.color.white),
+            PorterDuff.Mode.SRC_IN
+        )
+        else setColorFilter(
+            ContextCompat.getColor(context, R.color.stoneBrown),
+            PorterDuff.Mode.SRC_IN
+        )
     }
 
     override fun onSaveInstanceState(): Parcelable? {

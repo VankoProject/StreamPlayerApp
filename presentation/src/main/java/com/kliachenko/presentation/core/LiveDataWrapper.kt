@@ -1,6 +1,5 @@
 package com.kliachenko.presentation.core
 
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -27,7 +26,6 @@ interface LiveDataWrapper {
         }
 
         override fun update(value: T) {
-            Log.e("Player", "LiveDataWrapper update $value")
             liveData.value = value
         }
 
@@ -37,9 +35,9 @@ interface LiveDataWrapper {
 
     }
 
-    abstract class Post<T: Any>(
-        protected val liveData: MutableLiveData<T> = MutableLiveData()
-    ): Mutable<T> {
+    abstract class Post<T : Any>(
+        protected val liveData: MutableLiveData<T> = MutableLiveData(),
+    ) : Mutable<T> {
 
         override fun liveData(): LiveData<T> {
             return liveData

@@ -29,7 +29,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/xx_medium_text" />
 
-    <com.kliachenko.presentation.customView.CustomRecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contentRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
